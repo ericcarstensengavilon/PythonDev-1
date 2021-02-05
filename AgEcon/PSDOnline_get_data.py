@@ -12,12 +12,16 @@ commodities = ["0111000", "0113000", "0114200", "0114300", "0224200", "0230000",
 
 for c in commodities:
     for y in range(1990, 2021):
-        query = {'commodityCode': c, 'marketYear': y}
+        try:
+            query = {'commodityCode': c, 'marketYear': y}
 
-        url = requests.get('https://apps.fas.usda.gov/PSDOnlineDataServices/api/CommodityData/GetCommodityDataByYear', headers=headers, params=query)
+            url = requests.get('https://apps.fas.usda.gov/PSDOnlineDataServices/api/CommodityData/GetCommodityDataByYear', headers=headers, params=query)
 
-        data = (url.json())
+            data = (url.json())
 
-        with open(str(c) + '.' + str(y) + '.json', 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=4)
+            with open(str(c) + '.' + str(y) + '.json', 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False, indent=4)
+
+        except ValueError:
+            print("Oops!  That was no valid number.  Try again...")
 
