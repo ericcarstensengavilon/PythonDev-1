@@ -22,7 +22,7 @@ for c in commodities:
 
             with open(str(c) + '.' + str(y) + '.json', 'w', encoding='utf-8') as f:
                 json.dump(data, f, ensure_ascii=False, indent=4)
-
+            print(str(c) + " for " + str(y) + " has beend downloaded.")
         except ValueError:
             print("Oops!  " + str(c) + " for " + str(y) + " returns no data.  Try again...")
 
